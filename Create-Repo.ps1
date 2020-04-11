@@ -4,7 +4,7 @@ param (
     [int] $TeamId
 )
 
-$CreateRepoGithubUri = "https://api.github.com/orgs/$OrganizationName/repos";
+$CreateRepoGithubUri = "https://api.github.com/orgs/$OrganizationName/repos"
 
 $Body = @{
     name = $RepositoryName
@@ -15,4 +15,12 @@ $Header = GetBasicAuthenticationHeader
 
 $Response = Invoke-RestMethod -Uri $CreateRepoGithubUri -Headers @{Authorization = $Header} -ContentType "application/json" -Method Post -Body (ConvertTo-Json $Body)
 
-return $Response
+$OrganizationId = $Response.organization.id
+$Owner = $Response.owner.login
+$UpdateTeamPermissions = "https://api.github.com/organizations/$OrganizationId/team/$TeamId/repos/$Owner/$RepositoryName"
+
+$TeamPermissionsBody = @{
+    permission = "admin"
+}
+
+Invoke-RestMethod -Uri $UpdateTeamPermissions -Headers @{Authorization = $Header} -ContentType "application/json" -Method Put -Body (ConvertTo-Json $TeamPermissionsBody)

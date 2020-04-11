@@ -19,7 +19,6 @@ foreach ($team in $teams) {
 
     $createdTeam = .\Create-OrganisationTeam.ps1 -TeamName $team.TeamName -OrganizationName $GitHubOrganization
     .\Create-Repo.ps1 -RepositoryName $RepositoryName -OrganizationName $GitHubOrganization -TeamId $createdTeam.Id
-    .\Add-CollaboratorsToRepo.ps1 -OrganizationName $GitHubOrganization -TeamSlug $createdTeam.Slug -AADEmail $team.AADUser
     .\Create-AzureResources.ps1 -AzureUserPrinciple $AzureUserPrinciple -AzureUserPrincipleSecret $AzureUserPrincipleSecret -AzureResourceGroup $AzureResourceGroup-$($team.TeamName) -AzureApplicationName $repositoryName -AzureTenantName $AzureTenant -GitHubRepository $RepositoryName -GitHubOrganization $GitHubOrganization
     .\Add-ApplicationNameToYml.ps1 -ApplicationName $repositoryName
     .\Add-CodeToRepo.ps1 -OrganizationName $GitHubOrganization -RepositoryName $RepositoryName

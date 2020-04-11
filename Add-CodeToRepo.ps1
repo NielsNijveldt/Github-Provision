@@ -15,7 +15,9 @@ $Header = GetBasicAuthenticationHeader
 $Response = Invoke-RestMethod -Uri $CreateRepoGithubUri -Headers @{Authorization = $Header} -ContentType "application/json" -Method Get -Body (ConvertTo-Json $Body)
 
 $GitUrl = $Response.clone_url
+$GitUrl = $GitUrl.replace("github.com", "$env:GitHubApiKey@github.com")
 
+Remove-Item $TempDirectory -Recurse -ErrorAction Ignore
 New-Item $TempDirectory -ItemType Directory
 Push-Location $TempDirectory
 git clone $GitUrl .

@@ -40,7 +40,7 @@
         "EventbriteId": null,
         "Deleted": 0,
         "TeamName": "OrganizerName2-Team1",
-        "AADUser": "rajbos"
+        "AADUser": "team1@gdbc2020test.onmicrosoft.com"
     },
     {
       "VenueState": null,
@@ -82,7 +82,7 @@
       "TicketClassID": "",
       "EventbriteId": null,
       "Deleted": 0,
-      "TeamName": "OrganizerName2-Team1",
-      "AADUser": "nnijveldt@gmail.com"
+      "TeamName": "OrganizerName2-Team2",
+      "AADUser": "team2@gdbc2020test.onmicrosoft.com"
     }
   ]
